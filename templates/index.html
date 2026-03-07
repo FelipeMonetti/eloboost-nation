@@ -194,6 +194,92 @@
             width: 100% !important;
         }
     }
+    /* --- WIDGET CHAT FLOTANTE --- */
+    #chat-widget-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+    }
+    #chat-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: var(--nation-gold);
+        color: #000;
+        border: none;
+        font-size: 1.8rem;
+        box-shadow: 0 4px 15px rgba(207, 168, 95, 0.4);
+        cursor: pointer;
+        transition: transform 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #chat-button:hover { transform: scale(1.1); }
+    #chat-panel {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        width: 320px;
+        background-color: var(--nation-card);
+        border: 1px solid var(--nation-gold);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        overflow: hidden;
+        display: none; /* Oculto por defecto */
+        flex-direction: column;
+    }
+    #chat-panel.show { display: flex; }
+    .chat-header {
+        background: linear-gradient(90deg, #0f2e42 0%, #1c3d52 100%);
+        color: var(--nation-gold);
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--nation-gold);
+    }
+    .chat-body {
+        padding: 15px;
+        max-height: 350px;
+        overflow-y: auto;
+        background-color: var(--nation-bg);
+    }
+    .faq-item {
+        background-color: #05121A;
+        border: 1px solid #1c3d52;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+    }
+    .faq-item:hover { border-color: var(--nation-gold); }
+    .faq-question {
+        padding: 12px;
+        font-size: 0.85rem;
+        color: #e0e6ed;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .faq-answer {
+        padding: 0 12px 12px 12px;
+        font-size: 0.8rem;
+        color: #8ba2b5;
+        display: none;
+    }
+    .faq-item.active .faq-answer { display: block; }
+    .chat-footer {
+        padding: 15px;
+        background-color: var(--nation-card);
+        border-top: 1px solid #1c3d52;
+    }
+    @media (max-width: 768px) {
+        #chat-panel { width: 300px; right: 0; }
+        #chat-widget-container { bottom: 15px; right: 15px; }
+    }
     </style>
 </head>
 <body>
@@ -470,5 +556,51 @@
             }
         }
     </script>
+    <div id="chat-widget-container">
+    <div id="chat-panel">
+        <div class="chat-header">
+            <span class="fw-bold"><i class="bi bi-headset"></i> FAQ </span>
+            <button type="button" class="btn-close btn-close-white" onclick="toggleChat()" aria-label="Cerrar"></button>
+        </div>
+        
+        <div class="chat-body">
+            <p class="small text-secondary mb-3">¡Hola! Resolvé tus dudas rápido o escribinos al WhatsApp.</p>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Hay riesgo de baneo?</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">Cero riesgo. Jugamos en Modo Offline (nadie te ve conectado) y usamos VPN dedicada para proteger tu cuenta.</div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Cuánto tiempo tardan?</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">Promediamos 1 división por día. El tiempo exacto depende de tu MMR y la liga a la que quieras llegar.</div>
+            </div>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>¿Puedo usar mi cuenta?</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">¡Sí! Nos coordinamos por WhatsApp para no entrar al mismo tiempo. Podés jugar normales sin problema.</div>
+            </div>
+        </div>
+
+        <div class="chat-footer">
+            <a href="https://wa.me/5492214287466?text=Hola!%20Vengo%20de%20la%20web%20y%20tengo%20una%20duda." target="_blank" class="btn btn-whatsapp w-100 py-2">
+                <i class="bi bi-whatsapp"></i> Hablar por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <button id="chat-button" onclick="toggleChat()">
+        <i class="bi bi-chat-dots-fill"></i>
+    </button>
+</div>
+
+<script>
+    function toggleChat() {
+        document.getElementById('chat-panel').classList.toggle('show');
+    }
+    function toggleFaq(element) {
+        element.classList.toggle('active');
+    }
+</script>
 </body>
 </html>
