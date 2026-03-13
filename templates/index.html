@@ -8,7 +8,7 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet"> 
 
     <style>
         /* --- PALETA ELOBOOST NATION --- */
@@ -16,24 +16,24 @@
             --nation-bg: #030b11;
             --nation-card: #081a26;
             --nation-gold: #cfa85f;
-            --nation-gold-hover: #b38f4a; 
+            --nation-gold-hover: #e0be7d; 
             --nation-text: #e0e6ed;
+            --nation-text-secondary: #adb5bd; 
         }
 
         body { 
             background-color: var(--nation-bg); 
             color: var(--nation-text); 
             font-family: 'Montserrat', sans-serif; 
-            scroll-behavior: auto !important; 
+            scroll-behavior: smooth !important;
             background-image: radial-gradient(circle at top, #0f2e42 0%, var(--nation-bg) 60%); 
             margin: 0;
             padding: 0;
         }
 
-        /* NAVBAR */
+        /* NAVBAR - SIN DESENFOQUE */
         .navbar { 
             background: transparent; 
-            backdrop-filter: blur(3px); 
             border-bottom: none; 
             padding: 10px 0 !important;
             position: absolute; 
@@ -61,10 +61,33 @@
             background-repeat: no-repeat;
             box-shadow: inset 0 0 100px rgba(3,11,17,0.5);
             z-index: 0;
+            padding-top: 150px; 
         }
 
-        /* TARJETAS */
-        .card { 
+        .hero-banner h1 {
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(0,0,0,1);
+            margin-bottom: 20px;
+        }
+
+        .hero-banner p {
+            color: #ffffff; 
+            font-weight: 600;
+            font-size: 1.2rem;
+            max-width: 750px;
+            margin-bottom: 40px;
+            background-color: rgba(3, 11, 17, 0.6); 
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-shadow: 0 2px 10px rgba(0,0,0,1);
+        }
+
+        /* TARJETAS - Aplica sombra y hover SOLO si NO es la calculadora */
+        .card:not(.calc-card) { 
             background-color: var(--nation-card); 
             border: 1px solid transparent; 
             transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; 
@@ -72,20 +95,18 @@
             z-index: 10;
         }
         
-        .card:hover { 
+        .card:not(.calc-card):hover { 
             transform: translateY(-5px); 
             border-color: rgba(207, 168, 95, 0.3); 
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
-        /* TARJETA CALCULADORA */
+        /* TARJETA CALCULADORA (Fija, sin efecto hover molesto) */
         .calc-card {
+            background-color: var(--nation-card); 
             border: none !important; 
             margin-top: -15px; 
             margin-bottom: 80px; 
-        }
-        .calc-card:hover {
-            border: none !important; 
         }
 
         .card-header {
@@ -96,7 +117,7 @@
         }
 
         .text-gold { color: var(--nation-gold) !important; }
-        .text-secondary { color: #8ba2b5 !important; } 
+        .text-secondary { color: var(--nation-text-secondary) !important; } 
         
         /* BOTONES */
         .btn-nation {
@@ -107,18 +128,21 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 0 15px rgba(207, 168, 95, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
         .btn-nation:hover {
             background-color: var(--nation-gold-hover);
             color: #000;
-            box-shadow: 0 0 25px rgba(207, 168, 95, 0.4);
+            box-shadow: 0 0 25px rgba(207, 168, 95, 0.5);
+            transform: scale(1.05);
         }
 
         .btn-whatsapp { 
             background-color: #25D366; color: white; font-weight: bold; border: none; 
             display: flex; align-items: center; justify-content: center; gap: 8px; 
+            transition: transform 0.3s;
         }
-        .btn-whatsapp:hover { background-color: #1ebd59; color: white; }
+        .btn-whatsapp:hover { background-color: #1ebd59; color: white; transform: scale(1.02); }
 
         .form-select, .form-control {
             background-color: #030b11;
@@ -137,6 +161,14 @@
         .form-check-label { cursor: pointer; font-size: 0.9rem; color: #d1d1d1; font-weight: 400; }
         .bg-opacity-25 { background-color: rgba(0,0,0,0.3) !important; }
 
+        /* Estilos personalizados para Tooltips grises */
+        .tooltip-inner {
+            background-color: #1c3d52 !important;
+            color: #e0e6ed !important;
+            font-family: 'Montserrat', sans-serif;
+            text-align: left;
+        }
+
         /* IMÁGENES DE LAS LIGAS */
         .league-img { 
             width: 180px; 
@@ -149,8 +181,31 @@
         .league-img:hover { transform: scale(1.1); filter: drop-shadow(0 0 25px rgba(207, 168, 95, 0.4)); }
 
         .top-bar { font-size: 0.8rem; background-color: rgba(2, 6, 9, 0.9); letter-spacing: 1px; position: relative; z-index: 1001;}
-        .top-bar a { text-decoration: none; color: #5c7a8f; margin: 0 8px; transition: color 0.3s; }
-        .top-bar a:hover, .top-bar a.active { color: var(--nation-gold); font-weight: bold; }
+        .top-bar-btn { 
+            background: transparent !important; 
+            border: none !important; 
+            color: #5c7a8f !important; 
+            font-size: 0.8rem; 
+            font-weight: 600;
+        }
+        .top-bar-btn:hover, .top-bar-btn:focus, .show > .top-bar-btn { 
+            color: var(--nation-gold) !important; 
+            box-shadow: none !important;
+        }
+        .dropdown-menu-dark { background-color: #081a26; border-color: var(--nation-gold); }
+        .dropdown-item { font-size: 0.85rem; color: #e0e6ed; }
+        .dropdown-item:hover { background-color: var(--nation-gold); color: #000; }
+
+        /* Efecto Hover para Desplegables de PC */
+        @media (min-width: 992px) {
+            .top-bar .dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+            }
+            .top-bar .dropdown:hover .top-bar-btn {
+                color: var(--nation-gold) !important;
+            }
+        }
 
         .service-icon { font-size: 2.5rem; color: var(--nation-gold); margin-bottom: 15px; text-align: center; }
         
@@ -162,139 +217,92 @@
         /* 📱 MODO TELÉFONO (DISEÑO RESPONSIVO SEGURO)             */
         /* ======================================================== */
         @media (max-width: 768px) {
-    .container {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        max-width: 100% !important;
-    }
-    .calc-card {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        width: 100% !important;
-        border-radius: 0 !important;
-        margin-top: -60px !important;
-    }
-    .card-body {
-        padding: 10px !important;
-    }
-    .league-img {
-        width: 150px !important;
-        height: 150px !important;
-    }
-    .btn-nation {
-        width: 100% !important;
-    }
-}
-    @media (max-width: 768px) {
-        #resultado-final .badge {
-            white-space: normal !important;
-            font-size: 0.8rem !important;
-            line-height: 1.4 !important;
-            display: block !important;
-            width: 100% !important;
+            .container {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                max-width: 100% !important;
+            }
+            .hero-banner h1 {
+                font-size: 2.5rem; 
+            }
+            .hero-banner p {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+            .calc-card {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100% !important;
+                border-radius: 0 !important;
+                margin-top: -60px !important;
+            }
+            .card-body {
+                padding: 10px !important;
+            }
+            .league-img {
+                width: 150px !important;
+                height: 150px !important;
+            }
+            .btn-nation {
+                width: 100% !important;
+            }
+            #resultado-final .badge {
+                white-space: normal !important;
+                font-size: 0.8rem !important;
+                line-height: 1.4 !important;
+                display: block !important;
+                width: 100% !important;
+            }
         }
-    }
-    /* --- WIDGET CHAT FLOTANTE --- */
-    #chat-widget-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 9999;
-    }
-    #chat-button {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background-color: var(--nation-gold);
-        color: #000;
-        border: none;
-        font-size: 1.8rem;
-        box-shadow: 0 4px 15px rgba(207, 168, 95, 0.4);
-        cursor: pointer;
-        transition: transform 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    #chat-button:hover { transform: scale(1.1); }
-    #chat-panel {
-        position: absolute;
-        bottom: 80px;
-        right: 0;
-        width: 320px;
-        background-color: var(--nation-card);
-        border: 1px solid var(--nation-gold);
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        overflow: hidden;
-        display: none; /* Oculto por defecto */
-        flex-direction: column;
-    }
-    #chat-panel.show { display: flex; }
-    .chat-header {
-        background: linear-gradient(90deg, #0f2e42 0%, #1c3d52 100%);
-        color: var(--nation-gold);
-        padding: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid var(--nation-gold);
-    }
-    .chat-body {
-        padding: 15px;
-        max-height: 350px;
-        overflow-y: auto;
-        background-color: var(--nation-bg);
-    }
-    .faq-item {
-        background-color: #05121A;
-        border: 1px solid #1c3d52;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        cursor: pointer;
-        transition: border-color 0.3s;
-    }
-    .faq-item:hover { border-color: var(--nation-gold); }
-    .faq-question {
-        padding: 12px;
-        font-size: 0.85rem;
-        color: #e0e6ed;
-        font-weight: 600;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .faq-answer {
-        padding: 0 12px 12px 12px;
-        font-size: 0.8rem;
-        color: #8ba2b5;
-        display: none;
-    }
-    .faq-item.active .faq-answer { display: block; }
-    .chat-footer {
-        padding: 15px;
-        background-color: var(--nation-card);
-        border-top: 1px solid #1c3d52;
-    }
-    @media (max-width: 768px) {
-        #chat-panel { width: 300px; right: 0; }
-        #chat-widget-container { bottom: 15px; right: 15px; }
-    }
+        
+        /* --- WIDGET CHAT FLOTANTE --- */
+        #chat-widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+        #chat-button { width: 60px; height: 60px; border-radius: 50%; background-color: var(--nation-gold); color: #000; border: none; font-size: 1.8rem; box-shadow: 0 4px 15px rgba(207, 168, 95, 0.4); cursor: pointer; transition: transform 0.3s; display: flex; align-items: center; justify-content: center; }
+        #chat-button:hover { transform: scale(1.1); }
+        #chat-panel { position: absolute; bottom: 80px; right: 0; width: 320px; background-color: var(--nation-card); border: 1px solid var(--nation-gold); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); overflow: hidden; display: none; flex-direction: column; }
+        #chat-panel.show { display: flex; }
+        .chat-header { background: linear-gradient(90deg, #0f2e42 0%, #1c3d52 100%); color: var(--nation-gold); padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--nation-gold); }
+        .chat-body { padding: 15px; max-height: 350px; overflow-y: auto; background-color: var(--nation-bg); }
+        .faq-item { background-color: #05121A; border: 1px solid #1c3d52; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.3s; }
+        .faq-item:hover { border-color: var(--nation-gold); }
+        .faq-question { padding: 12px; font-size: 0.85rem; color: #e0e6ed; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 12px 12px 12px; font-size: 0.8rem; color: #8ba2b5; display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .chat-footer { padding: 15px; background-color: var(--nation-card); border-top: 1px solid #1c3d52; }
+        @media (max-width: 768px) { #chat-panel { width: 300px; right: 0; } #chat-widget-container { bottom: 15px; right: 15px; } }
     </style>
 </head>
 <body>
 
     <div class="py-1 border-bottom border-secondary top-bar" style="border-color: #1c3d52 !important;">
-        <div class="container d-flex justify-content-end">
-            <div class="me-4">
-                <a href="/?lang=es&currency={{ currency }}" class="{% if lang == 'es' %}active{% endif %}">ES</a>
-                <a href="/?lang=en&currency={{ currency }}" class="{% if lang == 'en' %}active{% endif %}">EN</a>
-                <a href="/?lang=pt&currency={{ currency }}" class="{% if lang == 'pt' %}active{% endif %}">PT</a>
+        <div class="container d-flex justify-content-end align-items-center">
+            
+            <div class="dropdown me-2">
+                <button class="btn top-bar-btn dropdown-toggle d-flex align-items-center gap-2 py-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if lang == 'es' %}<img src="https://flagcdn.com/w20/es.png" alt="ES" style="width:16px"> ES
+                    {% elif lang == 'en' %}<img src="https://flagcdn.com/w20/gb.png" alt="EN" style="width:16px"> EN
+                    {% elif lang == 'pt' %}<img src="https://flagcdn.com/w20/br.png" alt="PT" style="width:16px"> PT
+                    {% endif %}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="/?lang=es&currency={{ currency }}"><img src="https://flagcdn.com/w20/es.png" style="width:16px"> Español</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="/?lang=en&currency={{ currency }}"><img src="https://flagcdn.com/w20/gb.png" style="width:16px"> English</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="/?lang=pt&currency={{ currency }}"><img src="https://flagcdn.com/w20/br.png" style="width:16px"> Português</a></li>
+                </ul>
             </div>
-            <div>
-                <a href="/?lang={{ lang }}&currency=ARS" class="{% if currency == 'ARS' %}active{% endif %}">ARS ($)</a>
-                <a href="/?lang={{ lang }}&currency=USD" class="{% if currency == 'USD' %}active{% endif %}">USD (US$)</a>
+
+            <div class="dropdown">
+                <button class="btn top-bar-btn dropdown-toggle d-flex align-items-center gap-2 py-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if currency == 'ARS' %}<img src="https://flagcdn.com/w20/ar.png" alt="ARS" style="width:16px"> ARS ($)
+                    {% else %}<img src="https://flagcdn.com/w20/us.png" alt="USD" style="width:16px"> USD (US$)
+                    {% endif %}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="/?lang={{ lang }}&currency=ARS"><img src="https://flagcdn.com/w20/ar.png" style="width:16px"> ARS ($)</a></li>
+                    <li><a class="dropdown-item d-flex align-items-center gap-2" href="/?lang={{ lang }}&currency=USD"><img src="https://flagcdn.com/w20/us.png" style="width:16px"> USD (US$)</a></li>
+                </ul>
             </div>
+
         </div>
     </div>
 
@@ -306,17 +314,24 @@
         </div>
     </nav>
 
-    <div class="hero-banner"></div>
+    <div class="hero-banner d-flex flex-column align-items-center justify-content-start text-center px-3">
+        <div style="z-index: 10;">
+            <h1 class="text-white fw-bold display-4 mb-3">{{ hero_title }}</h1>
+            <p class="fs-5 mb-4 mx-auto">
+                {{ hero_subtitle }}
+            </p>
+        </div>
+    </div>
 
     <div class="container">
         
-        <div class="card calc-card mx-auto shadow-lg" style="max-width: 900px;"> 
+        <div id="calculadora" class="card calc-card mx-auto shadow-lg" style="max-width: 900px;"> 
             <div class="card-header fw-bold text-center py-3">
                 {{ calc_titulo }}
             </div>
             <div class="card-body p-4">
                 
-                <form action="/" method="post" autocomplete="off">
+                <form id="calcForm" autocomplete="off">
                     <input type="hidden" name="lang" value="{{ lang }}" />
                     <input type="hidden" name="currency" value="{{ currency }}" />
 
@@ -325,7 +340,7 @@
                             <img src="{{ imgActual }}" class="league-img" id="imgLigaActual" alt="Liga Actual" />
                             <label class="text-gold fw-bold mb-2 text-uppercase" style="font-size: 0.9rem;">{{ lbl_actual }}</label>
                             <div class="input-group">
-                                <select name="ligaActual" id="selectLigaActual" class="form-select" onchange="actualizarImagen('selectLigaActual', 'imgLigaActual')">
+                                <select name="ligaActual" id="selectLigaActual" class="form-select" onchange="actualizarImagen('selectLigaActual', 'imgLigaActual'); triggerUpdate();">
                                     <option value="Hierro" {% if selLigaActual == 'Hierro' %}selected{% endif %}>{{ liga_Hierro }}</option>
                                     <option value="Bronce" {% if selLigaActual == 'Bronce' %}selected{% endif %}>{{ liga_Bronce }}</option>
                                     <option value="Plata" {% if selLigaActual == 'Plata' %}selected{% endif %}>{{ liga_Plata }}</option>
@@ -336,7 +351,7 @@
                                     <option value="Master" {% if selLigaActual == 'Master' %}selected{% endif %}>{{ liga_Master }}</option>
                                     <option value="Grandmaster" {% if selLigaActual == 'Grandmaster' %}selected{% endif %}>{{ liga_Grandmaster }}</option>
                                 </select>
-                                <select name="divActual" class="form-select" style="max-width: 80px;">
+                                <select name="divActual" class="form-select" style="max-width: 80px;" onchange="triggerUpdate();">
                                     <option value="IV" {% if selDivActual == 'IV' %}selected{% endif %}>IV</option>
                                     <option value="III" {% if selDivActual == 'III' %}selected{% endif %}>III</option>
                                     <option value="II" {% if selDivActual == 'II' %}selected{% endif %}>II</option>
@@ -353,7 +368,7 @@
                             <img src="{{ imgDeseada }}" class="league-img" id="imgLigaDeseada" alt="Liga Deseada" />
                             <label class="text-gold fw-bold mb-2 text-uppercase" style="font-size: 0.9rem;">{{ lbl_deseada }}</label>
                             <div class="input-group">
-                                <select name="ligaDeseada" id="selectLigaDeseada" class="form-select" onchange="actualizarImagen('selectLigaDeseada', 'imgLigaDeseada')">
+                                <select name="ligaDeseada" id="selectLigaDeseada" class="form-select" onchange="actualizarImagen('selectLigaDeseada', 'imgLigaDeseada'); triggerUpdate();">
                                     <option value="Hierro" {% if selLigaDeseada == 'Hierro' %}selected{% endif %}>{{ liga_Hierro }}</option>
                                     <option value="Bronce" {% if selLigaDeseada == 'Bronce' %}selected{% endif %}>{{ liga_Bronce }}</option>
                                     <option value="Plata" {% if selLigaDeseada == 'Plata' %}selected{% endif %}>{{ liga_Plata }}</option>
@@ -364,7 +379,7 @@
                                     <option value="Master" {% if selLigaDeseada == 'Master' %}selected{% endif %}>{{ liga_Master }}</option>
                                     <option value="Grandmaster" {% if selLigaDeseada == 'Grandmaster' %}selected{% endif %}>{{ liga_Grandmaster }}</option>
                                 </select>
-                                <select name="divDeseada" class="form-select" style="max-width: 80px;">
+                                <select name="divDeseada" class="form-select" style="max-width: 80px;" onchange="triggerUpdate();">
                                     <option value="IV" {% if selDivDeseada == 'IV' %}selected{% endif %}>IV</option>
                                     <option value="III" {% if selDivDeseada == 'III' %}selected{% endif %}>III</option>
                                     <option value="II" {% if selDivDeseada == 'II' %}selected{% endif %}>II</option>
@@ -378,24 +393,38 @@
                         <label class="text-gold fw-bold mb-3 d-block text-start text-uppercase small">{{ lbl_extras }}</label>
                         <div class="row text-start">
                             <div class="col-md-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="extraRol" name="extraRol" {% if extraRol %}checked{% endif %}>
-                                    <label class="form-check-label" for="extraRol">{{ check_rol }}</label>
+                                <div class="form-check form-switch mb-2 d-flex align-items-center">
+                                    <input class="form-check-input mt-0" type="checkbox" role="switch" id="extraRol" name="extraRol" onchange="triggerUpdate()">
+                                    <label class="form-check-label ms-2" for="extraRol">{{ check_rol }}</label>
+                                    <i class="bi bi-question-circle-fill text-secondary ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ tt_rol }}" style="font-size: 0.85rem; cursor: help;"></i>
                                 </div>
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="extraChamp" name="extraChamp" {% if extraChamp %}checked{% endif %}>
-                                    <label class="form-check-label" for="extraChamp">{{ check_champ }}</label>
+                                <div class="form-check form-switch mb-2 d-flex align-items-center">
+                                    <input class="form-check-input mt-0" type="checkbox" role="switch" id="extraChamp" name="extraChamp" onchange="triggerUpdate()">
+                                    <label class="form-check-label ms-2" for="extraChamp">{{ check_champ }}</label>
+                                    <i class="bi bi-question-circle-fill text-secondary ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ tt_champ }}" style="font-size: 0.85rem; cursor: help;"></i>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="extraFlash" name="extraFlash" {% if extraFlash %}checked{% endif %}>
-                                    <label class="form-check-label" for="extraFlash">{{ check_flash }}</label>
+                                <div class="form-check form-switch mb-2 d-flex align-items-center">
+                                    <input class="form-check-input mt-0" type="checkbox" role="switch" id="extraFlash" name="extraFlash" onchange="triggerUpdate()">
+                                    <label class="form-check-label ms-2" for="extraFlash">{{ check_flash }}</label>
+                                    <i class="bi bi-question-circle-fill text-secondary ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ tt_flash }}" style="font-size: 0.85rem; cursor: help;"></i>
                                 </div>
-                                <div class="form-check form-switch mb-2">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="extraOffline" name="extraOffline" {% if extraOffline %}checked{% endif %}>
-                                    <label class="form-check-label" for="extraOffline">{{ check_offline }}</label>
+                                <div class="form-check form-switch mb-2 d-flex align-items-center">
+                                    <input class="form-check-input mt-0" type="checkbox" role="switch" id="extraExpress" name="extraExpress" onchange="triggerUpdate()">
+                                    <label class="form-check-label ms-2" for="extraExpress">{{ check_express }}</label>
+                                    <i class="bi bi-question-circle-fill text-secondary ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ tt_express }}" style="font-size: 0.85rem; cursor: help;"></i>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 rounded mt-3 text-start" style="border: 1px solid var(--nation-gold); background: linear-gradient(45deg, #05121A, rgba(207,168,95,0.1));">
+                            <div class="form-check form-switch mb-0 d-inline-block">
+                                <input class="form-check-input" type="checkbox" role="switch" id="extraDuoboost" name="extraDuoboost" onchange="checkDuoBoost(); triggerUpdate();">
+                                <label class="form-check-label text-gold fw-bold ms-1" style="font-size: 1.05rem;" for="extraDuoboost">
+                                    <i class="bi bi-headset me-1"></i> {{ check_duoboost }}
+                                </label>
+                                <i class="bi bi-question-circle-fill text-secondary ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ tt_duoboost }}" style="font-size: 0.85rem; cursor: help;"></i>
                             </div>
                         </div>
                     </div>
@@ -408,46 +437,43 @@
                             {{ txt_promo_2 }}
                         </span>
                     </div>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-nation w-50 rounded-pill py-2">
-                            {{ btn_cotizar }}
-                        </button>
-                    </div>
                 </form>
 
-                {% if es_high_elo %}
-                <div id="resultado-final" class="mt-4 p-4 rounded text-center shadow" style="background-color: #020609; border: 1px solid var(--nation-gold);">
-                    <h5 class="text-secondary mb-1 text-uppercase small">{{ res_presupuesto }}</h5>
-                    <h4 class="text-white fw-bold mb-3">{{ resumen }}</h4>
-                    <h1 class="text-gold fw-bold display-5">{{ txt_amedida }}</h1>
-                    
-                    <a href="https://wa.me/5492214287466?text={{ wsp_high_elo }}" target="_blank" class="btn btn-nation btn-lg mt-3 w-75 shadow-lg">
-                       {{ btn_consultar_wsp }}
-                    </a>
-                </div>
-                {% elif resultadoPrecio %}
-                <div id="resultado-final" class="mt-4 p-4 rounded text-center shadow" style="background-color: #020609; border: 1px solid #28a745;">
-                    <h5 class="text-secondary mb-1 text-uppercase small">{{ res_presupuesto }}</h5>
-                    <h4 class="text-white fw-bold mb-3">{{ resumen }}</h4>
-                    
-                    {% if texto_descuento %}
-                    <div class="mb-3">
-                        <span class="badge bg-success fs-6 px-3 py-2 border border-success text-uppercase">{{ texto_descuento }}</span>
+                <div id="result-container">
+                    {% if es_high_elo %}
+                    <div id="resultado-final" class="mt-4 p-4 rounded text-center shadow" style="background-color: #020609; border: 1px solid var(--nation-gold);">
+                        <h5 class="text-secondary mb-1 text-uppercase small">{{ res_presupuesto }}</h5>
+                        <h4 class="text-white fw-bold mb-3">{{ resumen }}</h4>
+                        <h1 class="text-gold fw-bold display-5">{{ txt_amedida }}</h1>
+                        
+                        <a href="https://wa.me/5492214287466?text={{ wsp_high_elo }}" target="_blank" class="btn btn-nation btn-lg mt-3 w-75 shadow-lg">
+                           {{ btn_consultar_wsp }}
+                        </a>
+                    </div>
+                    {% elif resultadoPrecio %}
+                    <div id="resultado-final" class="mt-4 p-4 rounded text-center shadow" style="background-color: #020609; border: 1px solid #28a745;">
+                        <h5 class="text-secondary mb-1 text-uppercase small">{{ res_presupuesto }}</h5>
+                        <h4 class="text-white fw-bold mb-3">{{ resumen }}</h4>
+                        
+                        {% if texto_descuento %}
+                        <div class="mb-3">
+                            <span class="badge bg-success fs-6 px-3 py-2 border border-success text-uppercase">{{ texto_descuento }}</span>
+                        </div>
+                        {% endif %}
+
+                        <h1 class="text-success fw-bold display-4">{{ simboloMoneda }}{{ resultadoPrecio }}</h1>
+                        
+                        <a href="https://wa.me/5492214287466?text=Hola!%20({{ currency }})%20Quiero%20contratar%20el%20boost:%20{{ resumen }}%20({{ simboloMoneda }}{{ resultadoPrecio }})" target="_blank" class="btn btn-nation btn-lg mt-3 w-75 shadow-lg">
+                           {{ btn_contratar }}
+                        </a>
                     </div>
                     {% endif %}
 
-                    <h1 class="text-success fw-bold display-4">{{ simboloMoneda }}{{ resultadoPrecio }}</h1>
-                    
-                    <a href="https://wa.me/5492214287466?text=Hola!%20({{ currency }})%20Quiero%20contratar%20el%20boost:%20{{ resumen }}%20({{ simboloMoneda }}{{ resultadoPrecio }})" target="_blank" class="btn btn-nation btn-lg mt-3 w-75 shadow-lg">
-                       {{ btn_contratar }}
-                    </a>
+                    {% if error %}
+                    <div class="alert alert-danger mt-3 text-center">{{ error }}</div>
+                    {% endif %}
                 </div>
-                {% endif %}
 
-                {% if error %}
-                <div class="alert alert-danger mt-3 text-center">{{ error }}</div>
-                {% endif %}
             </div>
         </div>
 
@@ -518,7 +544,7 @@
             </div>
         </div>
 
-        </div>
+    </div>
     
     <footer class="text-center text-secondary mt-5 mb-3 small py-4 border-top border-secondary" style="border-color: #1c3d52 !important;">
         <div class="mb-3">
@@ -528,24 +554,22 @@
     </footer>
 
     <script>
-        if (history.scrollRestoration) { 
-            history.scrollRestoration = 'manual'; 
+        function checkDuoBoost() {
+            const duoboost = document.getElementById('extraDuoboost');
+            const extras = ['extraRol', 'extraChamp', 'extraFlash', 'extraExpress'];
+            
+            extras.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (duoboost && duoboost.checked) {
+                        el.checked = false;
+                        el.disabled = true;
+                    } else {
+                        el.disabled = false;
+                    }
+                }
+            });
         }
-        
-        document.querySelector('form').addEventListener('submit', function() { 
-            sessionStorage.setItem('scrollPos', window.scrollY); 
-        });
-        
-        document.addEventListener('DOMContentLoaded', function() { 
-            var savedPos = sessionStorage.getItem('scrollPos'); 
-            if (savedPos) { 
-                window.scrollTo({
-                    top: parseFloat(savedPos),
-                    behavior: 'instant'
-                }); 
-                sessionStorage.removeItem('scrollPos'); 
-            }
-        });
 
         function actualizarImagen(selectId, imgId) {
             const mapImagenes = { "Hierro": "iron", "Bronce": "bronze", "Plata": "silver", "Oro": "gold", "Platino": "platinum", "Esmeralda": "emerald", "Diamante": "diamond", "Master": "master", "Grandmaster": "grandmaster" };
@@ -555,36 +579,89 @@
                 document.getElementById(imgId).src = "https://opgg-static.akamaized.net/images/medals_new/" + nombreIngles + ".png";
             }
         }
+
+        async function updatePriceRealTime() {
+            const form = document.getElementById('calcForm');
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/', { method: 'POST', body: formData });
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                const newContent = doc.getElementById('result-container').innerHTML;
+                document.getElementById('result-container').innerHTML = newContent;
+            } catch (err) {
+                console.error("Error calculando en tiempo real:", err);
+            }
+        }
+
+        function triggerUpdate() {
+            updatePriceRealTime();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() { 
+            checkDuoBoost(); 
+            // ELIMINADA LA FUNCIÓN triggerUpdate(); PARA QUE NO MUESTRE PRECIO AL CARGAR 
+
+            // Inicializar Tooltips limpios
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
     </script>
+
     <div id="chat-widget-container">
     <div id="chat-panel">
         <div class="chat-header">
-            <span class="fw-bold"><i class="bi bi-headset"></i> FAQ </span>
+            <span class="fw-bold"><i class="bi bi-headset"></i> {{ chat_faq }} </span>
             <button type="button" class="btn-close btn-close-white" onclick="toggleChat()" aria-label="Cerrar"></button>
         </div>
         
         <div class="chat-body">
-            <p class="small text-secondary mb-3">¡Hola! Resolvé tus dudas rápido o escribinos al WhatsApp.</p>
+            <p class="small text-secondary mb-3">{{ chat_desc }}</p>
             
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question"><span>¿Hay riesgo de baneo?</span> <i class="bi bi-chevron-down"></i></div>
-                <div class="faq-answer">Cero riesgo. Jugamos en Modo Offline (nadie te ve conectado) y usamos VPN dedicada para proteger tu cuenta.</div>
+                <div class="faq-question"><span>{{ faq_1_q }}</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">{{ faq_1_a }}</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>{{ faq_2_q }}</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">{{ faq_2_a }}</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>{{ faq_3_q }}</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">{{ faq_3_a }}</div>
             </div>
             
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question"><span>¿Cuánto tiempo tardan?</span> <i class="bi bi-chevron-down"></i></div>
-                <div class="faq-answer">Promediamos 1 división por día. El tiempo exacto depende de tu MMR y la liga a la que quieras llegar.</div>
+                <div class="faq-question"><span>{{ faq_4_q }}</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">{{ faq_4_a }}</div>
             </div>
             
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question"><span>¿Puedo usar mi cuenta?</span> <i class="bi bi-chevron-down"></i></div>
-                <div class="faq-answer">¡Sí! Nos coordinamos por WhatsApp para no entrar al mismo tiempo. Podés jugar normales sin problema.</div>
+                <div class="faq-question"><span>{{ faq_5_q }}</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">{{ faq_5_a }}</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>{{ faq_6_q }}</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">{{ faq_6_a }}</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question"><span>{{ faq_7_q }}</span> <i class="bi bi-chevron-down"></i></div>
+                <div class="faq-answer">{{ faq_7_a }}</div>
             </div>
         </div>
 
         <div class="chat-footer">
-            <a href="https://wa.me/5492214287466?text=Hola!%20Vengo%20de%20la%20web%20y%20tengo%20una%20duda." target="_blank" class="btn btn-whatsapp w-100 py-2">
-                <i class="bi bi-whatsapp"></i> Hablar por WhatsApp
+            <a href="https://wa.me/5492214287466?text={{ chat_desc }}" target="_blank" class="btn btn-whatsapp w-100 py-2">
+                <i class="bi bi-whatsapp"></i> {{ chat_btn }}
             </a>
         </div>
     </div>
@@ -602,5 +679,7 @@
         element.classList.toggle('active');
     }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
