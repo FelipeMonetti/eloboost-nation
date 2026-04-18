@@ -9,13 +9,13 @@ LIGAS = ["Hierro", "Bronce", "Plata", "Oro", "Platino", "Esmeralda", "Diamante",
 DIVISIONES = ["IV", "III", "II", "I"]
 
 # Precios base para las ligas normales
-PRECIOS_ARS = {"Hierro": 2000, "Bronce": 3000, "Plata": 4000, "Oro": 5000, "Platino": 6000, "Esmeralda": 8000}
-PRECIOS_USD = {"Hierro": 2, "Bronce": 2.5, "Plata": 3.5, "Oro": 4, "Platino": 5.5, "Esmeralda": 7.5}
+PRECIOS_ARS = {"Hierro": 2400, "Bronce": 3600, "Plata": 4800, "Oro": 6000, "Platino": 7200, "Esmeralda": 9600}
+PRECIOS_USD = {"Hierro": 2.4, "Bronce": 3, "Plata": 4.2, "Oro": 4.8, "Platino": 6.6, "Esmeralda": 9}
 
 # NUEVO: Precios escalonados específicos para Diamante
 # 0 = de IV a III | 1 = de III a II | 2 = de II a I
-PRECIOS_DIAMANTE_ARS = {0: 10000, 1: 12000, 2: 15000, 3: 15000} 
-PRECIOS_DIAMANTE_USD = {0: 10, 1: 12, 2: 15, 3: 15}
+PRECIOS_DIAMANTE_ARS = {0: 12000, 1: 14400, 2: 18000, 3: 18000}
+PRECIOS_DIAMANTE_USD = {0: 12, 1: 14.4, 2: 18, 3: 18}
 
 # --- Diccionario de Textos y Traducciones (Español, Inglés, Portugués) ---
 TEXTOS = {
